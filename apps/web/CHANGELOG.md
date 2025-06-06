@@ -1,5 +1,35 @@
 # web
 
+## 1.0.37
+
+### Patch Changes
+
+- Updated dependencies [3c477d5]
+- Updated dependencies [c782810]
+- Updated dependencies [dad784b]
+  - @llamaindex/chat-ui@0.5.6
+
+## 1.0.36
+
+### Patch Changes
+
+- Updated dependencies [4973f3a]
+  - @llamaindex/chat-ui@0.5.5
+
+## 1.0.35
+
+### Patch Changes
+
+- Updated dependencies [77620ee]
+  - @llamaindex/chat-ui@0.5.4
+
+## 1.0.34
+
+### Patch Changes
+
+- Updated dependencies [a34688a]
+  - @llamaindex/chat-ui@0.5.3
+
 ## 1.0.33
 
 ### Patch Changes
