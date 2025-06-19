@@ -1,5 +1,58 @@
 # web
 
+## 1.0.40
+
+### Patch Changes
+
+- Updated dependencies [fe679c4]
+  - @llamaindex/chat-ui@0.5.9
+
+## 1.0.39
+
+### Patch Changes
+
+- Updated dependencies [d544d57]
+  - @llamaindex/chat-ui@0.5.8
+
+## 1.0.38
+
+### Patch Changes
+
+- 23093ed: docs: add more chatui examples
+- Updated dependencies [23093ed]
+- Updated dependencies [0c929c4]
+  - @llamaindex/chat-ui@0.5.7
+
+## 1.0.37
+
+### Patch Changes
+
+- Updated dependencies [3c477d5]
+- Updated dependencies [c782810]
+- Updated dependencies [dad784b]
+  - @llamaindex/chat-ui@0.5.6
+
+## 1.0.36
+
+### Patch Changes
+
+- Updated dependencies [4973f3a]
+  - @llamaindex/chat-ui@0.5.5
+
+## 1.0.35
+
+### Patch Changes
+
+- Updated dependencies [77620ee]
+  - @llamaindex/chat-ui@0.5.4
+
+## 1.0.34
+
+### Patch Changes
+
+- Updated dependencies [a34688a]
+  - @llamaindex/chat-ui@0.5.3
+
 ## 1.0.33
 
 ### Patch Changes

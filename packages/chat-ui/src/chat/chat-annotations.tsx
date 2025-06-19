@@ -1,4 +1,3 @@
-import { ComponentType } from 'react'
 import {
   ChatAgentEvents,
   ChatEvents,
@@ -19,7 +18,6 @@ import { getAnnotationData } from './annotations/annotations.js'
 import { useChatMessage } from './chat-message.context.js'
 import { useChatUI } from './chat.context.js'
 import { Message } from './chat.interface.js'
-import ChatCanvas from './canvas/index.js'
 
 export function EventAnnotations() {
   const { message, isLast, isLoading } = useChatMessage()
@@ -66,7 +64,9 @@ export function DocumentFileAnnotations() {
     MessageAnnotationType.DOCUMENT_FILE
   )
   if (contentFileData.length === 0) return null
-  return <ChatFiles data={contentFileData[0]} />
+
+  const alignmentClass = message.role === 'user' ? 'ml-auto' : 'mr-auto'
+  return <ChatFiles data={contentFileData[0]} className={alignmentClass} />
 }
 
 function preprocessSourceNodes(nodes: SourceNode[]): SourceNode[] {
@@ -119,11 +119,4 @@ export function SuggestedQuestionsAnnotations() {
       requestData={requestData}
     />
   )
-}
-
-export const defaultAnnotationRenderers: Record<
-  string,
-  ComponentType<{ data: any }>
-> = {
-  artifact: ChatCanvas.Artifact,
 }

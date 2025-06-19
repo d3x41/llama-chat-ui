@@ -1,5 +1,52 @@
 # @llamaindex/chat-ui
 
+## 0.5.9
+
+### Patch Changes
+
+- fe679c4: fix: baseUrl should be optional for llama deploy
+
+## 0.5.8
+
+### Patch Changes
+
+- d544d57: feat: specify workflow to run of the given deployment
+
+## 0.5.7
+
+### Patch Changes
+
+- 23093ed: docs: add more chatui examples
+- 0c929c4: feat: useWorkflow
+- Updated dependencies [0c929c4]
+  - @llamaindex/llama-deploy@0.0.2
+
+## 0.5.6
+
+### Patch Changes
+
+- 3c477d5: fix: source nodes should from document artifact
+- c782810: Remove default allowed extensions and checkExtension from FileUploader
+- dad784b: fix: document citation regex
+
+## 0.5.5
+
+### Patch Changes
+
+- 4973f3a: fix: document editor overflow
+
+## 0.5.4
+
+### Patch Changes
+
+- 77620ee: feat: document editor with citations
+
+## 0.5.3
+
+### Patch Changes
+
+- a34688a: feat: use mdxeditor for document editor
+
 ## 0.5.2
 
 ### Patch Changes

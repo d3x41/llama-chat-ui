@@ -402,3 +402,172 @@ function SafeHookUsage() {
 - [Customization](./customization.mdx) - Use hooks for custom styling and behavior
 - [Examples](./examples.mdx) - See complete examples using hooks
 - [Core Components](./core-components.mdx) - Understand component-hook relationships
+
+### useWorkflow
+
+Manage LlamaIndex workflow sessions, send events, and handle streaming responses.
+
+```tsx
+import { useWorkflow } from '@llamaindex/chat-ui'
+
+function WorkflowComponent() {
+  const {
+    runId,
+    start,
+    stop,
+    sendEvent,
+    events,
+    status,
+  } = useWorkflow({
+    baseUrl: 'http://localhost:8000',
+    deployment: 'my-deployment',
+    workflow: 'my-workflow',
+    onStopEvent: (event) => {
+      console.log('Workflow stopped:', event)
+    },
+    onError: (error) => {
+      console.error('Workflow error:', error)
+    },
+  })
+
+  const handleStartWorkflow = async () => {
+    await start({ message: 'Hello workflow!' })
+  }
+
+  const handleSendCustomEvent = async () => {
+    await sendEvent({
+      type: 'workflow.ProgressEvent',
+      data: { custom: 'data' }
+    })
+  }
+
+  const handleStopWorkflow = async () => {
+    await stop({ reason: 'User requested stop' })
+  }
+
+  return (
+    <div>
+      <p>Run ID: {runId}</p>
+      <p>Status: {status}</p>
+      <p>Events received: {events.length}</p>
+
+      <button onClick={handleStartWorkflow} disabled={status === 'running'}>
+        Start Workflow
+      </button>
+      <button onClick={handleSendCustomEvent} disabled={!runId}>
+        Send Event
+      </button>
+      <button onClick={handleStopWorkflow} disabled={status !== 'running'}>
+        Stop Workflow
+      </button>
+
+      <div>
+        <h4>Events:</h4>
+        {events.map((event, i) => (
+          <div key={i}>
+            <strong>{event.type}</strong>: {JSON.stringify(event.data)}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+```
+
+**Options:**
+
+- `baseUrl` - Base URL for the workflow API (optional)
+- `deployment` - Name of the registered deployment
+- `workflow` - Set the service to run - if not set uses the default workflow (optional)
+- `runId` - Optional run ID for resuming a previous workflow run
+- `onStopEvent` - Callback when workflow receives a stop event
+- `onError` - Error callback for workflow errors
+
+**Returned Properties:**
+
+- `runId` - Current workflow run ID
+- `start` - Function to start a new workflow with initial event data
+- `stop` - Function to send stop event to current workflow
+- `sendEvent` - Function to send custom events to the workflow
+- `events` - Array of all received workflow events
+- `status` - Current workflow run status ('idle' | 'running' | 'complete' | 'error')
+
+**Workflow Event Types:**
+
+```tsx
+interface WorkflowEvent {
+  type: string
+  data?: any
+}
+
+// Built-in event types
+enum WorkflowEventType {
+  StartEvent = 'llama_index.core.workflow.events.StartEvent',
+  StopEvent = 'llama_index.core.workflow.events.StopEvent',
+}
+```
+
+**Advanced Usage:**
+
+Resume an existing workflow task:
+
+```tsx
+function ResumeWorkflowComponent() {
+  const workflow = useWorkflow({
+    deployment: 'my-deployment',
+    runId: 'existing-run-id', // Resume existing task
+    onStopEvent: (event) => {
+      console.log('Workflow completed:', event)
+    },
+  })
+
+  // Events from the existing task will be automatically fetched
+  useEffect(() => {
+    console.log('Restored events:', workflow.events)
+  }, [workflow.events])
+
+  return (
+    <div>
+      <p>Resumed run: {workflow.runId}</p>
+      <p>Events: {workflow.events.length}</p>
+    </div>
+  )
+}
+```
+
+Custom event handling:
+
+```tsx
+interface CustomWorkflowEvent extends WorkflowEvent {
+  type: 'workflow.ProgressEvent' | 'workflow.ResultEvent' | string
+  data: {
+    progress?: number
+    result?: any
+    message?: string
+  }
+}
+
+function CustomWorkflowComponent() {
+  const workflow = useWorkflow<CustomWorkflowEvent>({
+    deployment: 'progress-deployment',
+    workflow: 'progress-workflow',
+    onStopEvent: (event) => {
+      if (event.type === 'workflow.ResultEvent') {
+        console.log('Final result:', event.data.result)
+      }
+    },
+  })
+
+  const progressEvents = workflow.events.filter(
+    e => e.type === 'workflow.ProgressEvent'
+  )
+  const latestProgress = progressEvents[progressEvents.length - 1]?.data?.progress || 0
+
+  return (
+    <div>
+      <p>Progress: {latestProgress}%</p>
+      <progress value={latestProgress} max="100" />
+    </div>
+  )
+}
+```
