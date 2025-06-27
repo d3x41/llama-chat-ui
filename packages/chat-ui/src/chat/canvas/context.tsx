@@ -111,7 +111,7 @@ export function ChatCanvasProvider({ children }: { children: ReactNode }) {
       {
         id: `restore-success-${Date.now()}`,
         role: 'assistant',
-        content: `Successfully restored to ${artifact.type} version ${getArtifactVersion(artifact).versionNumber}\n${toInlineAnnotation({ type: 'artifact', data: newArtifact })}`,
+        content: `Successfully restored to ${artifact.type} version ${getArtifactVersion(artifact).versionNumber}${toInlineAnnotation({ type: 'artifact', data: newArtifact })}`,
       },
     ] as (Message & { id: string })[]
 
@@ -145,6 +145,7 @@ export function ChatCanvasProvider({ children }: { children: ReactNode }) {
           content,
           title: documentArtifact.data.title,
           type: documentArtifact.data.type,
+          sources: documentArtifact.data.sources,
         },
       }
     }
@@ -159,7 +160,7 @@ export function ChatCanvasProvider({ children }: { children: ReactNode }) {
       },
       {
         role: 'assistant',
-        content: `Updated content for ${artifact.type} artifact version ${getArtifactVersion(artifact).versionNumber}\n${toInlineAnnotation({ type: 'artifact', data: newArtifact })}`,
+        content: `Updated content for ${artifact.type} artifact version ${getArtifactVersion(artifact).versionNumber}${toInlineAnnotation({ type: 'artifact', data: newArtifact })}`,
       },
     ] as (Message & { id: string })[]
 

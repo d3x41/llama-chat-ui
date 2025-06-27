@@ -1,0 +1,27 @@
+name: workflow
+
+control-plane:
+  port: 8000
+
+default-service: echo_workflow
+
+services:
+  echo_workflow:
+    name: Echo Workflow
+    source:
+      type: local
+      name: src
+    path: src/echo_workflow:workflow
+  adhoc_workflow:
+    name: Adhoc Workflow
+    source:
+      type: local
+      name: src
+    path: src/adhoc_workflow:workflow
+
+ui:
+  name: My Nextjs App
+  port: 3000
+  source:
+    type: local
+    name: ui

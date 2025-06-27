@@ -1,5 +1,18 @@
 # @llamaindex/chat-ui-docs
 
+## 0.0.7
+
+### Patch Changes
+
+- d544d57: feat: specify workflow to run of the given deployment
+
+## 0.0.6
+
+### Patch Changes
+
+- 23093ed: docs: add more chatui examples
+- 0c929c4: feat: useWorkflow
+
 ## 0.0.5
 
 ### Patch Changes
