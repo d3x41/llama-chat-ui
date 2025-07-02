@@ -65,7 +65,7 @@ The easiest way to get started is to connect the whole `ChatSection` component w
 
 ```tsx
 import { ChatSection } from '@llamaindex/chat-ui'
-import { useChat } from 'ai/react'
+import { useChat } from '@ai-sdk/react'
 
 const ChatExample = () => {
   const handler = useChat()
@@ -186,6 +186,7 @@ If your app is using code, latex or pdf files, you'll need to import their CSS f
 ```tsx
 import '@llamaindex/chat-ui/styles/markdown.css' // code, latex and custom markdown styling
 import '@llamaindex/chat-ui/styles/pdf.css' // pdf styling
+import '@llamaindex/chat-ui/styles/editor.css' // document editor styling
 ```
 
 The `code.css` file uses the `atom-one-dark` theme from highlight.js by default. There are a lot of others to choose from: https://highlightjs.org/demo
